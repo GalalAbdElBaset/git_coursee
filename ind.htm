@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>AJAX Example</title>
+</head>
+<body>
+<button onclick="getData()">Get Users</button>
+<div id="result"></div>
+
+<script>
+function getData() {
+    // 1️⃣ نعمل object من XMLHttpRequest
+    let xhr = new XMLHttpRequest();
+
+    // 2️⃣ نحدد نوع الطلب والرابط
+    xhr.open("GET", "https://api.github.com/users/elzerowebschool/repos"); // هنا ممكن يكون JSON أو XML
+
+    // 3️⃣ نتابع حالة الطلب
+    xhr.onreadystatechange = function () {
+    if (xhr.readyState === 4 && xhr.status === 200) {
+            let data = JSON.parse(xhr.responseText);
+            console.log(data);
+               // نعرض أول اسم Repo كمثال
+            document.getElementById("result").innerText = data[0].name;
+    }
+    };
+
+    // 5️⃣ نرسل الطلب
+    xhr.send();
+}
+</script>
+</body>
+</html>
